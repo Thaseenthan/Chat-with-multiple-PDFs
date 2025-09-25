@@ -32,7 +32,7 @@ To install the MultiPDF Chat App, please follow these steps:
 
 3. Obtain an API key from OpenAI and add it to the `.env` file in the project directory.
 ```commandline
-GEMINI_API_KEY=your_secrit_api_key
+GOOGLE_API_KEY=your_secrit_api_key
 ```
 
 ## Usage

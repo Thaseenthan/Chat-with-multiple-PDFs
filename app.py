@@ -45,7 +45,7 @@ def get_pdf_chunks_and_metadata(pdf_docs, chunk_size=5000):
 def get_vectorstore(text_chunks, metadatas):
     embeddings = CohereEmbeddings(
         model="embed-english-light-v3.0",
-        cohere_api_key="07pGZKapCMVuBSo1kpw1qX8dNbeZEiWQF4sGiH62"
+        cohere_api_key=os.getenv("COHERE_API_KEY")
     )
     return FAISS.from_texts(texts=text_chunks, embedding=embeddings, metadatas=metadatas)
 

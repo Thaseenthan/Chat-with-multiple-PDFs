@@ -5,7 +5,8 @@ from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_cohere import CohereEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_google_genai import ChatGoogleGenerativeAI
+# from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_community.llms import Ollama
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from htmlTemplates import css, bot_template, user_template
@@ -50,16 +51,39 @@ def get_vectorstore(text_chunks, metadatas):
 
 
 # ---------- Conversation Chain ----------
+#  Use Google Gemini as LLM
+# def get_conversation_chain(vectorstore):
+#     llm = ChatGoogleGenerativeAI(
+#         model="gemini-2.5-flash",
+#         google_api_key=os.getenv("GOOGLE_API_KEY")
+#     )
+#     memory = ConversationBufferMemory(
+#         memory_key="chat_history",
+#         return_messages=True,
+#         output_key="answer"   # ✅ only save the answer, not the sources
+#     )
+#     return ConversationalRetrievalChain.from_llm(
+#         llm=llm,
+#         retriever=vectorstore.as_retriever(),
+#         memory=memory,
+#         return_source_documents=True
+#     )
+
+
+#  Use Ollama LLM
 def get_conversation_chain(vectorstore):
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash",
-        google_api_key=os.getenv("GOOGLE_API_KEY")
+    llm = Ollama(
+        model="qwen2.5:0.5b",    # Lightweight model (~0.5GB RAM)
+        temperature=0.3,         # Controls creativity
+        base_url="http://localhost:11434"
     )
+
     memory = ConversationBufferMemory(
         memory_key="chat_history",
         return_messages=True,
-        output_key="answer"   # ✅ only save the answer, not the sources
+        output_key="answer"
     )
+
     return ConversationalRetrievalChain.from_llm(
         llm=llm,
         retriever=vectorstore.as_retriever(),

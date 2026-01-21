@@ -58,15 +58,10 @@ To install the MultiPDF Chat App, please follow these steps:
    pip install -r requirements.txt
    ```
 
-5. Create a `.env` file in the project directory (optional for future use):
-   **Start Ollama**: Ensure Ollama is running in the background. Open a new terminal and verify:
-   ```bash
-   ollama list
-   ```
-   You should see `qwen2.5:0.5b` in the list
-   GOOGLE_API_KEY=your_google_api_key_here
-   ```
-   *Note: Currently using Ollama (local), but Google Gemini option is available in the code (commented out).*
+3. Obtain an API key from OpenAI and add it to the `.env` file in the project directory.
+```commandline
+GEMINI_API_KEY=your_secrit_api_key
+```
 
 ## Usage
 -----

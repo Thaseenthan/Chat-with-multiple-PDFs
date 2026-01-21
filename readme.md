@@ -116,7 +116,7 @@ llm = ChatGoogleGenerativeAI(
 ## Technology Stack
 ------------
 - **Frontend**: Streamlit
-- **LLM**: Google Gemini 2.0 Flash
+- **LLM**: Ollama (qwen2.5:0.5b)
 - **Embeddings**: Cohere embed-english-light-v3.0
 - **Vector Store**: FAISS
 - **PDF Processing**: PyPDF2
